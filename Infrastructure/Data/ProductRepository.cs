@@ -22,6 +22,7 @@ namespace Infrastructure.Data
                 .Include(e => e.ProductType)
                 .Include(e => e.ProductBrand)
                 .FirstOrDefaultAsync(e => e.Id == id);
+
             if(product is null) 
             {
                 return null;
@@ -36,6 +37,16 @@ namespace Infrastructure.Data
                 .Include(e => e.ProductType)
                 .Include(e => e.ProductBrand)
                 .ToListAsync();
+        }
+
+        public async Task<IReadOnlyList<ProductBrand>> GetProductBrandsAsync() 
+        {
+            return await _context.ProductBrands.ToListAsync();
+        }
+
+        public async Task<IReadOnlyList<ProductType>> GetProductTypesAsync() 
+        {
+            return await _context.ProductTypes.ToListAsync();
         }
     }
 }
